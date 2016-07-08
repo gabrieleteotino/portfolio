@@ -19,7 +19,7 @@ var config = {
 // Default task
 gulp.task('default', ['less', 'minify-css', 'minify-js', 'copy']);
 
-// Less task to compile the less files
+// Compile the less files
 gulp.task('less', function () {
     return gulp.src('less/creative.less')
         .pipe(less())
@@ -54,25 +54,25 @@ gulp.task('minify-js', function () {
 // Copy Bootstrap core files from node_modules to vendor directory
 gulp.task('bootstrap', function () {
     return gulp.src(['node_modules/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
-        .pipe(gulp.dest('vendor/bootstrap'))
+        .pipe(gulp.dest('lib/bootstrap'))
 });
 
 // Copy jQuery core files from node_modules to vendor directory
 gulp.task('jquery', function () {
-    return gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
-        .pipe(gulp.dest('vendor/jquery'))
+    return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
+        .pipe(gulp.dest('lib/jquery'))
 });
 
 // Copy Magnific Popup core files from node_modules to vendor directory
 gulp.task('magnific-popup', function () {
-    return gulp.src(['node_modules/magnific-popup/dist/*'])
-        .pipe(gulp.dest('vendor/magnific-popup'))
+    return gulp.src(['node_modules/magnific-popup/dist/*.{min.js,css}'])
+        .pipe(gulp.dest('lib/magnific-popup'))
 });
 
 // Copy ScrollReveal JS core JavaScript files from node_modules
 gulp.task('scrollreveal', function () {
-    return gulp.src(['node_modules/scrollreveal/dist/*.js'])
-        .pipe(gulp.dest('vendor/scrollreveal'))
+    return gulp.src(['node_modules/scrollreveal/dist/*.min.js'])
+        .pipe(gulp.dest('lib/scrollreveal'))
 });
 
 // Copy Font Awesome core files from node_modules to vendor directory
