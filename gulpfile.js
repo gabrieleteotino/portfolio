@@ -10,6 +10,12 @@ var pkg = require('./package.json');
 const gutil = require('gulp-util');
 var ftp = require('vinyl-ftp');
 
+var flatten = require('gulp-flatten');
+
+var config = {
+    "package-dir": "./node_modules"
+}
+
 // Default task
 gulp.task('default', ['less', 'minify-css', 'minify-js', 'copy']);
 
@@ -36,7 +42,7 @@ gulp.task('minify-css', function () {
 
 // Minify JS
 gulp.task('minify-js', function () {
-    return gulp.src('js/creative.js')
+    return gulp.src('src/creative.js')
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('js'))
@@ -72,14 +78,10 @@ gulp.task('scrollreveal', function () {
 // Copy Font Awesome core files from node_modules to vendor directory
 gulp.task('fontawesome', function () {
     return gulp.src([
-        'node_modules/font-awesome/**',
-        '!node_modules/font-awesome/**/*.map',
-        '!node_modules/font-awesome/.npmignore',
-        '!node_modules/font-awesome/*.txt',
-        '!node_modules/font-awesome/*.md',
-        '!node_modules/font-awesome/*.json'
+        'node_modules/font-awesome/**/*.{min.css,otf,eot,svg,ttf,woff,woff2}'
     ])
-        .pipe(gulp.dest('vendor/font-awesome'))
+        // .pipe(flatten())
+        .pipe(gulp.dest('lib/font-awesome'))
 });
 
 // Copy all dependencies from node_modules
@@ -123,7 +125,7 @@ gulp.task('deploy', function () {
         'css/**',
         'img/**',
         'js/**',
-        'fonts/**',
+        'lib/**',
         'index.html'
     ];
 
