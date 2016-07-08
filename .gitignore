@@ -41,3 +41,6 @@ jspm_packages
 vendor
 css
 js
+
+# Private configuration files
+ftp-config.json
